@@ -9,6 +9,8 @@ This crate is based on the original base `crates-io-proxy` [crates.io](https://c
 This one is a refactoring of the code from the project above and coverting it into the `lib` for
 embedding into the project.
 
+[Issues Tracker](https://codeberg.org/4neko/crates-io-proxy-fork/issues)
+
 The reason for forking, instead contributing into the original is: I don't have time to convince 
 anyone in anything, the S-AS and OSS allows forking of code, so I did it. The code is published 
 under original license.
