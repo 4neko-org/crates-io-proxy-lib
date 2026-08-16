@@ -1,7 +1,18 @@
+
 use std::{borrow::Cow, fmt, io::{self, Cursor, ErrorKind}, sync::{Arc, LazyLock}, time::Instant};
 
-use crates_io_proxy_fork::{AsyncCratesIoProxy, AsyncCratesIoProxyHttpClient, AsyncCratesIoProxyHttpClientError, AsyncCratesIoProxyHttpClientErrorMarker, AsyncCratesIoProxyHttpClientResponse, AsyncCratesIoProxyLog, AsyncCratesIoProxyRequest, CratesIoProxyConsts, CratesIoProxyRequestMethod, CratesIoProxyResponsePacketData, ProxyConfig, metadata_cache::CratesIoProxyIndexCache};
-use rocket::{Catcher, Config, Data, Request, Response, Route, catcher, http::{Method::{self, Get}, Status}, response::{Responder, status::Custom}, route};
+use crates_io_proxy_fork::
+{
+    AsyncCratesIoProxy, AsyncCratesIoProxyHttpClient, AsyncCratesIoProxyHttpClientError, AsyncCratesIoProxyHttpClientErrorMarker, 
+    AsyncCratesIoProxyHttpClientResponse, AsyncCratesIoProxyLog, AsyncCratesIoProxyRequest, CratesIoProxyConsts, CratesIoProxyRequestMethod, 
+    CratesIoProxyResponsePacketData, ProxyConfig, metadata_cache::CratesIoProxyIndexCache
+};
+
+use rocket::
+{
+    Catcher, Config, Data, Request, Response, Route, catcher, http::{Method::{self, Get}, Status}, response::{Responder, status::Custom}, route
+};
+
 use tempfile::TempDir;
 
 static LAZY_TEMPDIR: LazyLock<TempDir> = 

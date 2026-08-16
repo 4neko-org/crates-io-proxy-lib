@@ -1,6 +1,6 @@
 [package]
 name = "crates-io-proxy-fork"
-description = "Caching HTTP proxy server for the crates.io registry"
+description = "Caching HTTP proxy server for the crates.io registry lib"
 version = "0.2.4"
 authors = ["Sergey Kvachonok <ravenexp@gmail.com>", "Aleksandr Morozov <alex@4neko.org>"]
 edition = "2024"
@@ -16,7 +16,7 @@ crate-type = ["rlib"]
 
 [features]
 
-default = ["async_client"]
+default = []
 
 async_client = []
 
@@ -37,4 +37,4 @@ name = "impl_example"
 
 [[example]]
 name = "impl_async_example"
-features = ["async_client"]
+required-features = ["async_client"]

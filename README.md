@@ -1,5 +1,9 @@
 # crates-io-proxy-lib
 
+<img src="https://cdn.4neko.org/proxy_io.webp" width="200"/>
+
+<br/>
+
 This crate is based on the original base `crates-io-proxy` [crates.io](https://crates.io/crates/crates-io-proxy) [git](https://github.com/ravenexp/crates-io-proxy)
 
 This one is a refactoring of the code from the project above and coverting it into the `lib` for
@@ -12,6 +16,10 @@ under original license.
 The `examples` can be found in the repository.
 
 Below is an original README.
+
+## Features
+
+- `async_client` enables the ASYNC code
 
 Caching HTTP proxy server for the `crates.io` registry
 ======================================================
