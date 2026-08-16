@@ -2,10 +2,10 @@ name: linux-os-test-arm64
 on: 
   pull_request:
     branches:
-      - master
+      - next
   push:
     branches:
-      - master
+      - next
 
 jobs: 
   linux-test:

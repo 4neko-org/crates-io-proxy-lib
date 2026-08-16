@@ -2,10 +2,10 @@ name: netbsd-os-test
 on: 
   pull_request:
     branches:
-      - master
+      - next
   push:
     branches:
-      - master
+      - next
 
 jobs: 
   netbsd-test:

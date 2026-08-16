@@ -2,10 +2,10 @@ name: freebsd-os-test
 on: 
   pull_request:
     branches:
-      - master
+      - next
   push:
     branches:
-      - master
+      - next
 
 jobs: 
   freebsd-test:
