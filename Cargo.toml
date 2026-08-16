@@ -1,9 +1,9 @@
 [package]
-name = "crates-io-proxy"
+name = "crates-io-proxy-fork"
 description = "Caching HTTP proxy server for the crates.io registry"
 version = "0.2.4"
-authors = ["Sergey Kvachonok <ravenexp@gmail.com>"]
-edition = "2021"
+authors = ["Sergey Kvachonok <ravenexp@gmail.com>", "Aleksandr Morozov <alex@4neko.org>"]
+edition = "2024"
 homepage = "https://github.com/ravenexp/crates-io-proxy"
 repository = "https://github.com/ravenexp/crates-io-proxy"
 license = "MIT OR Apache-2.0"
@@ -11,18 +11,30 @@ keywords = ["crates", "cargo", "registry", "proxy", "cache"]
 categories = ["development-tools", "caching", "web-programming::http-server"]
 readme = "README.md"
 
+[lib]
+crate-type = ["rlib"]
+
 [features]
-native-certs = [ "ureq/native-certs" ]
+
+default = ["async_client"]
+
+async_client = []
 
 [dependencies]
-tiny_http = "0.12"
+ureq = "3.4"
 httpdate = "1.0"
 url = "2.5"
-ureq = "2.12"
-pico-args = { version = "0.5", features = ["combined-flags"] }
-log = "0.4"
-env_logger = { version = "0.11", default-features = false }
 
-[profile.release]
-lto = true
-strip = "debuginfo"
+
+[dev-dependencies]
+tiny_http_fork = "0.12"
+tempfile = "~3.27"
+reqwest = { version = "0.13" }
+rocket = "0.5"
+
+[[example]]
+name = "impl_example"
+
+[[example]]
+name = "impl_async_example"
+features = ["async_client"]

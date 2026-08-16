@@ -1,3 +1,18 @@
+# crates-io-proxy-lib
+
+This crate is based on the original base `crates-io-proxy` [crates.io](https://crates.io/crates/crates-io-proxy) [git](https://github.com/ravenexp/crates-io-proxy)
+
+This one is a refactoring of the code from the project above and coverting it into the `lib` for
+embedding into the project.
+
+The reason for forking, instead contributing into the original is: I don't have time to convince 
+anyone in anything, the S-AS and OSS allows forking of code, so I did it. The code is published 
+under original license.
+
+The `examples` can be found in the repository.
+
+Below is an original README.
+
 Caching HTTP proxy server for the `crates.io` registry
 ======================================================
 
@@ -63,7 +78,7 @@ In this configuration, the git registry index link should be used instead:
 index = "https://crates-io-index.example.com/crates-io-index.git"
 ```
 
-Configuration
+Configuration (not appliciable for this crate)
 -------------
 
 The proxy server can be configured by either command line options

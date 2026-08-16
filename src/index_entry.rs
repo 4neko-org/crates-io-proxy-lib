@@ -1,5 +1,6 @@
 //! Registry index entry handling helpers
 
+use std::borrow::Cow;
 use std::fmt::{Display, Formatter, Result};
 use std::path::PathBuf;
 use std::time::{Duration, Instant, SystemTime};
@@ -8,19 +9,25 @@ use httpdate::{fmt_http_date, parse_http_date};
 
 /// Registry index entry structure
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
-pub struct IndexEntry {
+pub struct IndexEntry 
+{
     /// Crate name
     name: String,
+
     /// HTTP entity tag header
     etag: Option<String>,
+
     /// Index file modification time
     mtime: Option<SystemTime>,
+
     /// Last index entry update check time
     atime: Option<Instant>,
 }
 
-impl Display for IndexEntry {
-    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+impl Display for IndexEntry 
+{
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result 
+    {
         f.write_str(&self.name)
     }
 }
@@ -28,8 +35,10 @@ impl Display for IndexEntry {
 impl IndexEntry {
     /// Creates a registry index entry object for a crate.
     #[must_use]
-    pub fn new(name: &str) -> Self {
-        IndexEntry {
+    pub fn new(name: &str) -> Self 
+    {
+        IndexEntry 
+        {
             name: name.to_owned(),
             etag: None,
             mtime: None,
@@ -37,9 +46,24 @@ impl IndexEntry {
         }
     }
 
+    pub(crate) 
+    fn set_index_response_headers(&self, headers: &mut Vec<(Cow<'_, str>, Cow<'_, str>)>)
+    {
+        if let Some(etag) = self.etag() 
+        {
+            headers.push((Cow::Borrowed("ETag"), Cow::Owned(etag.to_string())));
+        }
+
+        if let Some(last_modified) = self.last_modified() 
+        {
+            headers.push((Cow::Borrowed("Last-Modified"), Cow::Owned(last_modified.as_str().to_string())));
+        };
+    }
+
     /// Creates an entry from the sparse index URL path.
     #[must_use]
-    pub fn try_from_index_url(url: &str) -> Option<Self> {
+    pub fn try_from_index_url(url: &str) -> Option<Self> 
+    {
         if url.contains('.') {
             return None;
         }
@@ -60,54 +84,63 @@ impl IndexEntry {
 
     /// Gets the crate name.
     #[must_use]
-    pub fn name(&self) -> &str {
+    pub fn name(&self) -> &str 
+    {
         &self.name
     }
 
     /// Checks if this index entry file contents is the same
     /// as `other` according to the associated metadata.
     #[must_use]
-    pub fn is_equivalent(&self, other: &IndexEntry) -> bool {
+    pub fn is_equivalent(&self, other: &IndexEntry) -> bool 
+    {
         (self.etag().is_some() && (self.etag() == other.etag()))
             || (self.last_modified().is_some() && (self.last_modified() == other.last_modified()))
     }
 
     /// Checks if this index entry is expired according for the TTL given.
     #[must_use]
-    pub fn is_expired_with_ttl(&self, ttl: &Duration) -> bool {
+    pub fn is_expired_with_ttl(&self, ttl: &Duration) -> bool 
+    {
         self.atime.is_some_and(|atime| atime.elapsed() > *ttl)
     }
 
     /// Gets the HTTP entity tag metadata.
     #[must_use]
-    pub fn etag(&self) -> Option<&str> {
+    pub fn etag(&self) -> Option<&str> 
+    {
         self.etag.as_deref()
     }
 
     /// Gets the HTTP Last-Modified metadata.
     #[must_use]
-    pub fn last_modified(&self) -> Option<String> {
+    pub fn last_modified(&self) -> Option<String> 
+    {
         self.mtime.map(fmt_http_date)
     }
 
     /// Gets the file modification time metadata.
     #[must_use]
-    pub fn mtime(&self) -> Option<SystemTime> {
+    pub fn mtime(&self) -> Option<SystemTime> 
+    {
         self.mtime
     }
 
     /// Sets the HTTP entity tag metadata.
-    pub fn set_etag(&mut self, etag: &str) {
+    pub fn set_etag(&mut self, etag: &str) 
+    {
         self.etag = Some(etag.to_owned());
     }
 
     /// Sets the HTTP Last-Modified metadata.
-    pub fn set_last_modified(&mut self, last_modified: &str) {
+    pub fn set_last_modified(&mut self, last_modified: &str) 
+    {
         self.mtime = parse_http_date(last_modified).ok();
     }
 
     /// Sets the file modification time metadata.
-    pub fn set_mtime(&mut self, mtime: SystemTime) {
+    pub fn set_mtime(&mut self, mtime: SystemTime) 
+    {
         self.mtime = Some(mtime);
     }
 
@@ -118,7 +151,8 @@ impl IndexEntry {
 
     /// Builds the index entry download URL (relative).
     #[must_use]
-    pub fn to_index_url(&self) -> String {
+    pub fn to_index_url(&self) -> String 
+    {
         let name = &self.name;
 
         match name.len() {
@@ -135,17 +169,20 @@ impl IndexEntry {
 
     /// Builds the relative index entry file path for cache storage.
     #[must_use]
-    pub fn to_file_path(&self) -> PathBuf {
+    pub fn to_file_path(&self) -> PathBuf 
+    {
         PathBuf::from(self.to_index_url())
     }
 }
 
 #[cfg(test)]
-mod tests {
+mod tests 
+{
     use super::*;
 
     #[test]
-    fn test_from_url() {
+    fn test_from_url() 
+    {
         assert_eq!(IndexEntry::try_from_index_url(""), None);
         assert_eq!(IndexEntry::try_from_index_url("abc"), None);
         assert_eq!(IndexEntry::try_from_index_url("a/bc"), None);
@@ -170,7 +207,8 @@ mod tests {
     }
 
     #[test]
-    fn test_to_url() {
+    fn test_to_url() 
+    {
         assert_eq!(IndexEntry::new("").to_index_url(), "");
         assert_eq!(IndexEntry::new("a").to_index_url(), "1/a");
         assert_eq!(IndexEntry::new("ab").to_index_url(), "2/ab");
