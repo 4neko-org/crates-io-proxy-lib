@@ -9,3 +9,4 @@ response, CratesIoProxyRequest trait for response generation.
 - Added ProxyConfig for instance configuration
 - Added examples
 - Added async version.
+- Enabled workflows.
