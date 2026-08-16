@@ -4,6 +4,13 @@
 
 <br/>
 
+
+<a href = "https://codeberg.org/4neko/crates-io-proxy-fork/actions"><img src="https://codeberg.org/4neko/crates-io-proxy-fork/badges/workflows/linux-os.yml/badge.svg" /></a>
+<a href = "https://codeberg.org/4neko/crates-io-proxy-fork/actions"><img src="https://codeberg.org/4neko/crates-io-proxy-fork/badges/workflows/freebsd-os.yml/badge.svg" /></a>
+<a href = "https://codeberg.org/4neko/crates-io-proxy-fork/actions"><img src="https://codeberg.org/4neko/crates-io-proxy-fork/badges/workflows/openbsd-os.yml/badge.svg" /></a>
+<a href = "https://codeberg.org/4neko/crates-io-proxy-fork/actions"><img src="https://codeberg.org/4neko/crates-io-proxy-fork/badges/workflows/netbsd-os.yml/badge.svg" /></a>
+<a href = "https://codeberg.org/4neko/crates-io-proxy-fork/actions"><img src="https://codeberg.org/4neko/crates-io-proxy-fork/badges/workflows/linux-os-arm.yml/badge.svg" /></a>
+
 This crate is based on the original base `crates-io-proxy` [crates.io](https://crates.io/crates/crates-io-proxy) [git](https://github.com/ravenexp/crates-io-proxy)
 
 This one is a refactoring of the code from the project above and coverting it into the `lib` for
