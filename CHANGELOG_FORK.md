@@ -1,3 +1,6 @@
+## 0.2.5 (29.10.2026)
+- ureq 3.4 -> 3.5
+
 ## 0.2.4 (15.08.2026)
 
 - Code was refactored to be used as a lib. A trait CratesIoProxyLog for logging, CratesIoProxyResponsePacket for crates

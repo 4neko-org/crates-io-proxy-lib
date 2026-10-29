@@ -95,38 +95,6 @@ In this configuration, the git registry index link should be used instead:
 index = "https://crates-io-index.example.com/crates-io-index.git"
 ```
 
-Configuration (not appliciable for this crate)
--------------
-
-The proxy server can be configured by either command line options
-or environment variables.
-
-Run `crates-io-proxy --help` to get the following help page:
-
-```
-Usage:
-    crates-io-proxy [options]
-
-Options:
-    -v, --verbose              print more debug info
-    -h, --help                 print help and exit
-    -V, --version              print version and exit
-    -L, --listen ADDRESS:PORT  address and port to listen at (0.0.0.0:3080)
-        --listen-unix PATH     Unix domain socket path to listen at
-    -U, --upstream-url URL     upstream download URL (https://crates.io/)
-    -I, --index-url URL        upstream index URL (https://index.crates.io/)
-    -S, --proxy-url URL        this proxy server URL (http://localhost:3080/)
-    -C, --cache-dir DIR        proxy cache directory (/var/cache/crates-io-proxy)
-    -T, --cache-ttl SECONDS    index cache entry Time-to-Live in seconds (3600)
-
-Environment:
-    INDEX_CRATES_IO_URL        same as --index-url option
-    CRATES_IO_URL              same as --upstream-url option
-    CRATES_IO_PROXY_URL        same as --proxy-url option
-    CRATES_IO_PROXY_CACHE_DIR  same as --cache-dir option
-    CRATES_IO_PROXY_CACHE_TTL  same as --cache-ttl option
-```
-
 Advanced configuration
 ----------------------
 

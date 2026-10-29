@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security Reports
+    url: mailto:patch@4neko.org
+    about: "Please email <patch@4neko.org>"
